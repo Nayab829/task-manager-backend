@@ -94,7 +94,7 @@ export const getTasks = asyncHandler(async (req, res) => {
 
 // Get Single Task
 export const getTaskById = asyncHandler(async (req, res) => {
-    const task = await Task.findById(req.params.id).populate("assignedTo","name email avatar");
+    const task = await Task.findById(req.params.id).populate("assignedTo", "name email avatar");
     if (!task) {
         return res.status(404).json({ message: "No Task Found." });
     }
@@ -135,22 +135,7 @@ export const updateTask = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Task updated successfully", updatedTask });
 });
 
-// Update Task Status
-export const updateTaskStatus = asyncHandler(async (req, res) => {
-    const task = await Task.findById(req.params.id).populate("assignedTo", "name email avatar");
-    if (!task) {
-        return res.status(404).json({ message: "Task not found." });
-    }
 
-    // if (!checkAssigned(task, req.user)) {
-    //     return res.status(400).json({ message: "Not authorized" });
-    // }
-
-    task.status = req.body.status || task.status;
-
-    await task.save();
-    res.status(200).json({ message: "Task status updated successfully", task });
-});
 
 // Update Todo Checklist
 export const updateTodoChecklist = asyncHandler(async (req, res) => {
@@ -242,7 +227,7 @@ export const getUserDashboardData = asyncHandler(async (req, res) => {
         acc[curr._id] = curr.count || 0;
         return acc;
     }, {})
-    const recentTasks = await Task.find({assignedTo:req.user._id}).sort({ createdAt: -1 }).limit(10);
+    const recentTasks = await Task.find({ assignedTo: req.user._id }).sort({ createdAt: -1 }).limit(10);
     return res.status(200).json({
         statistics: {
             all: totalTasks,
