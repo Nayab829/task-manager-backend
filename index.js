@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(express.json()); // for parsing JSON request body
 app.use(express.urlencoded({ extended: true })); // <-- for form data
 app.use(cors({
-    origin: process.env.CLIENT_URL || https://task-manager-app-three-roan.vercel.app,
+    origin: process.env.CLIENT_URL || "https://task-manager-app-three-roan.vercel.app",
     credentials: true, // allow cookies
 }));
 connectDB()
