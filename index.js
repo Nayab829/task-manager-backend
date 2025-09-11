@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(express.json()); // for parsing JSON request body
 app.use(express.urlencoded({ extended: true })); // <-- for form data
 app.use(cors({
-    origin: "*",
+    origin: "https://task-manager-app-sandy-ten.vercel.app",
     credentials: true, // allow cookies
 }));
 connectDB()
